@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vision & Mission: GIANT MINDS</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Import Modern Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Using Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <style>
+      /* Specific Styles for Vision & Mission Page */
+      .page-hero {
+        background-color: #f7f7f7;
+        padding: 100px 0 50px;
+        text-align: center;
+      }
+      .page-hero h2 {
+        margin-bottom: 15px;
+        color: var(--color-primary);
+      }
+      .page-hero p {
+        font-size: 1.2em;
+        color: var(--color-text-dark);
+        max-width: 800px;
+        margin: 0 auto 40px;
+        font-weight: 300;
+      }
+
+      .content-block {
+        padding: 50px 0;
+      }
+      .content-block h3 {
+        text-align: left;
+        margin-bottom: 25px;
+        color: var(--color-text-dark);
+        font-size: 2em;
+      }
+
+      /* Vision/Mission/Values Boxes */
+      .vision-mission-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 40px;
+        margin-bottom: 60px;
+      }
+      .vm-card {
+        background-color: var(--color-white);
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: var(--box-shadow-card);
+        border-top: 5px solid var(--color-primary);
+        transition: transform 0.3s ease;
+      }
+      .vm-card:hover {
+        transform: translateY(-5px);
+      }
+      .vm-card i {
+        font-size: 3.5em;
+        color: var(--color-primary);
+        margin-bottom: 20px;
+      }
+      .vm-card h4 {
+        font-size: 1.8em;
+        color: var(--color-primary);
+        margin-bottom: 15px;
+        font-weight: 700;
+      }
+      .vm-card p {
+        font-size: 1.05em;
+        line-height: 1.8;
+        color: var(--color-text-dark);
+      }
+
+      /* Core Values Section */
+      .values-section {
+        background-color: var(--color-dark-bg);
+        color: var(--color-white);
+        padding: 60px 40px;
+        border-radius: 12px;
+        margin-bottom: 60px;
+      }
+      .values-section h3 {
+        text-align: center;
+        color: var(--color-white);
+        margin-bottom: 40px;
+      }
+      .values-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+      }
+      .value-item {
+        text-align: center;
+      }
+      .value-item i {
+        font-size: 2.5em;
+        color: var(--color-secondary);
+        margin-bottom: 15px;
+      }
+      .value-item h5 {
+        font-size: 1.3em;
+        color: var(--color-white);
+        margin-bottom: 10px;
+        font-weight: 600;
+      }
+      .value-item p {
+        font-size: 0.95em;
+        line-height: 1.6;
+        color: #ccc;
+      }
+
+      /* Impact Section */
+      .impact-section {
+        background-color: #f7f7f7;
+        padding: 50px;
+        border-radius: 12px;
+        margin-bottom: 60px;
+      }
+      .impact-section h3 {
+        text-align: center;
+        color: var(--color-primary);
+        margin-bottom: 30px;
+      }
+      .impact-items {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+      }
+      .impact-item {
+        background-color: var(--color-white);
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: var(--box-shadow-subtle);
+      }
+      .impact-item h5 {
+        color: var(--color-primary);
+        font-size: 1.3em;
+        margin-bottom: 10px;
+        font-weight: 600;
+      }
+      .impact-item p {
+        font-size: 0.95em;
+        line-height: 1.6;
+        color: #666;
+      }
+
+      @media (max-width: 768px) {
+        .content-block h3 {
+          font-size: 1.5em;
+        }
+        .vision-mission-grid {
+          gap: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 1. Navigation Bar (Identical to Index) -->
+    <header class="navbar">
+      <div class="container">
+        <nav id="main-nav">
+          <ul>
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="vision-mission.html">Vision & Mission</a></li>
+            <li>
+              <a href="contact-candidate.html" class="cta-link">For Candidates</a>
+            </li>
+            <li>
+              <a href="contact-partner.html" class="cta-link">For Partners</a>
+            </li>
+          </ul>
+        </nav>
+        <a href="index.html" class="logo">GIANT MINDS</a>
+
+        <button
+          class="hamburger"
+          aria-expanded="false"
+          aria-controls="main-nav"
+        >
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-hero section reveal">
+      <div class="container">
+        <h2>Our Vision & Mission</h2>
+        <p>
+          At GIANT MINDS, we are driven by a clear vision and mission to
+          transform the landscape of talent development and career placement.
+        </p>
+      </div>
+    </section>
+
+    <!-- Vision, Mission & Values Cards -->
+    <div class="container content-block reveal">
+      <div class="vision-mission-grid">
+        <div class="vm-card">
+          <i class="fas fa-telescope"></i>
+          <h4>Our Vision</h4>
+          <p>
+            To build a world where every talented individual has access to
+            breakthrough opportunities, and every employer can find the perfect
+            fit for their needs through a trusted, vetted network of excellence.
+          </p>
+        </div>
+
+        <div class="vm-card">
+          <i class="fas fa-target"></i>
+          <h4>Our Mission</h4>
+          <p>
+            GIANT MINDS is committed to revolutionizing talent placement and
+            career development by creating seamless connections between
+            candidates, employers, and training partners through rigorous
+            curation and standardized quality.
+          </p>
+        </div>
+
+        <div class="vm-card">
+          <i class="fas fa-heart"></i>
+          <h4>Our Purpose</h4>
+          <p>
+            We exist to unlock human potential and drive meaningful growth—for
+            individuals seeking career advancement and organizations seeking
+            exceptional talent to fuel their success.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Core Values Section -->
+    <div class="container content-block reveal">
+      <div class="values-section">
+        <h3>Core Values That Drive Us</h3>
+        <div class="values-list">
+          <div class="value-item">
+            <i class="fas fa-handshake"></i>
+            <h5>Integrity</h5>
+            <p>
+              We conduct ourselves with honesty and transparency in every
+              interaction, building trust through authentic relationships.
+            </p>
+          </div>
+
+          <div class="value-item">
+            <i class="fas fa-star"></i>
+            <h5>Excellence</h5>
+            <p>
+              We maintain the highest standards in talent curation, service
+              delivery, and partnership execution.
+            </p>
+          </div>
+
+          <div class="value-item">
+            <i class="fas fa-rocket"></i>
+            <h5>Innovation</h5>
+            <p>
+              We continuously evolve and improve our methods to stay ahead in
+              talent development and placement strategies.
+            </p>
+          </div>
+
+          <div class="value-item">
+            <i class="fas fa-users"></i>
+            <h5>Collaboration</h5>
+            <p>
+              We believe in the power of partnerships and work together with our
+              network to create win-win outcomes.
+            </p>
+          </div>
+
+          <div class="value-item">
+            <i class="fas fa-chart-line"></i>
+            <h5>Growth</h5>
+            <p>
+              We are committed to the continuous development and success of our
+              candidates, partners, and organization.
+            </p>
+          </div>
+
+          <div class="value-item">
+            <i class="fas fa-lightbulb"></i>
+            <h5>Impact</h5>
+            <p>
+              Every action we take is designed to create meaningful, positive
+              change in the careers and lives we touch.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Impact & Commitment Section -->
+    <div class="container content-block reveal">
+      <div class="impact-section">
+        <h3>Our Commitment to Impact</h3>
+        <div class="impact-items">
+          <div class="impact-item">
+            <h5>For Candidates</h5>
+            <p>
+              We are committed to empowering individuals with the tools,
+              training, and connections they need to achieve career
+              breakthroughs and realize their full potential.
+            </p>
+          </div>
+
+          <div class="impact-item">
+            <h5>For Employers</h5>
+            <p>
+              We deliver pre-vetted, high-quality talent that aligns with your
+              organizational values and business objectives, saving time and
+              reducing hiring risk.
+            </p>
+          </div>
+
+          <div class="impact-item">
+            <h5>For Partners</h5>
+            <p>
+              We create a collaborative ecosystem where training institutions,
+              mentors, and employers thrive together, building a sustainable
+              network of excellence.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Full Team Section -->
+    <div id="full-team" class="container content-block reveal">
+      <h3 style="text-align: center; margin-bottom: 50px;">Meet Our Full Team</h3>
+      
+      <div class="team-grid team-full">
+        <!-- Team Member 1 - Founder -->
+        <div class="team-member">
+          <div class="member-image-wrapper">
+            <img src="https://via.placeholder.com/250x250?text=Founder" alt="Founder" class="member-image" />
+            <div class="member-overlay">
+              <div class="member-info">
+                <p class="member-bio">Visionary leader with 15+ years in talent management and career development.</p>
+                <div class="member-contact">
+                  <a href="mailto:founder@giantminds.com"><i class="fas fa-envelope"></i></a>
+                  <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h4>Founder Name</h4>
+          <p class="member-position">Founder & CEO</p>
+        </div>
+
+        <!-- Team Member 2 - Co-Founder -->
+        <div class="team-member">
+          <div class="member-image-wrapper">
+            <img src="https://via.placeholder.com/250x250?text=Co-Founder" alt="Co-Founder" class="member-image" />
+            <div class="member-overlay">
+              <div class="member-info">
+                <p class="member-bio">Strategic innovator with expertise in business development and ecosystem building.</p>
+                <div class="member-contact">
+                  <a href="mailto:cofounder@giantminds.com"><i class="fas fa-envelope"></i></a>
+                  <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h4>Co-Founder Name</h4>
+          <p class="member-position">Co-Founder & CTO</p>
+        </div>
+
+        <!-- Team Member 3 -->
+        <div class="team-member">
+          <div class="member-image-wrapper">
+            <img src="https://via.placeholder.com/250x250?text=Team+Member+3" alt="Team Member" class="member-image" />
+            <div class="member-overlay">
+              <div class="member-info">
+                <p class="member-bio">Talent acquisition specialist with proven track record in matching candidates with opportunities.</p>
+                <div class="member-contact">
+                  <a href="mailto:member3@giantminds.com"><i class="fas fa-envelope"></i></a>
+                  <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h4>Team Member 3</h4>
+          <p class="member-position">Talent Acquisition Lead</p>
+        </div>
+
+        <!-- Team Member 4 -->
+        <div class="team-member">
+          <div class="member-image-wrapper">
+            <img src="https://via.placeholder.com/250x250?text=Team+Member+4" alt="Team Member" class="member-image" />
+            <div class="member-overlay">
+              <div class="member-info">
+                <p class="member-bio">Career development coach dedicated to helping candidates achieve their professional goals.</p>
+                <div class="member-contact">
+                  <a href="mailto:member4@giantminds.com"><i class="fas fa-envelope"></i></a>
+                  <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h4>Team Member 4</h4>
+          <p class="member-position">Career Development Coach</p>
+        </div>
+
+        <!-- Team Member 5 -->
+        <div class="team-member">
+          <div class="member-image-wrapper">
+            <img src="https://via.placeholder.com/250x250?text=Team+Member+5" alt="Team Member" class="member-image" />
+            <div class="member-overlay">
+              <div class="member-info">
+                <p class="member-bio">Partnership strategist focused on building and maintaining strong employer relationships.</p>
+                <div class="member-contact">
+                  <a href="mailto:member5@giantminds.com"><i class="fas fa-envelope"></i></a>
+                  <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h4>Team Member 5</h4>
+          <p class="member-position">Partnership Manager</p>
+        </div>
+
+        <!-- Team Member 6 -->
+        <div class="team-member">
+          <div class="member-image-wrapper">
+            <img src="https://via.placeholder.com/250x250?text=Team+Member+6" alt="Team Member" class="member-image" />
+            <div class="member-overlay">
+              <div class="member-info">
+                <p class="member-bio">Operations specialist ensuring seamless execution and continuous improvement across all programs.</p>
+                <div class="member-contact">
+                  <a href="mailto:member6@giantminds.com"><i class="fas fa-envelope"></i></a>
+                  <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h4>Team Member 6</h4>
+          <p class="member-position">Operations Director</p>
+        </div>
+
+        <!-- Team Member 7 -->
+        <div class="team-member">
+          <div class="member-image-wrapper">
+            <img src="https://via.placeholder.com/250x250?text=Team+Member+7" alt="Team Member" class="member-image" />
+            <div class="member-overlay">
+              <div class="member-info">
+                <p class="member-bio">Data analyst providing insights and metrics to optimize our talent placement strategies.</p>
+                <div class="member-contact">
+                  <a href="mailto:member7@giantminds.com"><i class="fas fa-envelope"></i></a>
+                  <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h4>Team Member 7</h4>
+          <p class="member-position">Data & Analytics Specialist</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="container content-block" style="text-align: center; reveal">
+      <h3 style="margin-bottom: 30px">Ready to Join the Movement?</h3>
+      <p style="font-size: 1.1em; margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto;">
+        Whether you're a candidate seeking your next breakthrough or an employer
+        looking for exceptional talent, GIANT MINDS is here to make it happen.
+      </p>
+      <div class="cta-group">
+        <a href="contact-candidate.html" class="cta-button primary-cta">
+          Start Your Journey
+        </a>
+        <a href="contact-partner.html" class="cta-button secondary-cta">
+          Become a Partner
+        </a>
+      </div>
+    </div>
+
+    <!-- 7. Footer (Identical to Index) -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col logo-info">
+            <h4 class="logo">GIANT MINDS</h4>
+            <p>
+              Building a system that works. Fueling your next breakthrough hire.
+            </p>
+          </div>
+          <div class="footer-col">
+            <h4>Navigation</h4>
+            <ul>
+              <li><a href="index.html#hero">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="vision-mission.html">Vision & Mission</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+            </ul>
+          </div>
+          <div class="footer-col social-links">
+            <h4>Connect</h4>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-facebook-square"></i></a>
+            <a href="#"><i class="fab fa-twitter-square"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2025 GIANT MINDS. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Link JavaScript file for interactivity -->
+    <script src="script.js"></script>
+  </body>
+</html>
