@@ -1,14 +1,15 @@
 /* --- 1. Base Styles & Variables --- */
 :root {
-  --color-primary: #cc0000; /* Deep Red */
-  --color-secondary: #ff6b6b; /* Light Red/Coral */
+  --color-primary: #003d7a; /* Deep Blue */
+  --color-secondary: #0066cc; /* Light Blue */
+  --color-accent: #ffc800; /* Flashy Gold */
   --color-text-dark: #1a1a1a; /* Near Black */
-  --color-dark-bg: #111111; /* Very Dark Charcoal */
+  --color-dark-bg: #0a1628; /* Very Dark Blue */
   --color-white: #ffffff;
   --font-heading: "Poppins", sans-serif;
   --font-body: "Roboto", sans-serif;
-  --box-shadow-subtle: 0 4px 15px rgba(0, 0, 0, 0.08);
-  --box-shadow-card: 0 8px 20px rgba(0, 0, 0, 0.15);
+  --box-shadow-subtle: 0 4px 15px rgba(0, 51, 153, 0.08);
+  --box-shadow-card: 0 8px 20px rgba(0, 51, 153, 0.15);
 }
 
 * {
@@ -86,6 +87,22 @@ h3 {
   color: var(--color-primary) !important;
 }
 
+.accent-text {
+  color: var(--color-accent) !important;
+}
+
+.accent-bg {
+  background: var(--color-accent) !important;
+}
+
+/* Gold accent highlights */
+.highlight-gold {
+  background: linear-gradient(120deg, transparent, var(--color-accent) 50%, transparent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* --- 2. Navigation Bar (Header) --- */
 .navbar {
   background: var(--color-white);
@@ -108,11 +125,28 @@ h3 {
   font-weight: 700;
   order: 1;
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  height: 50px;
 }
 
 .navbar .logo:hover {
   color: var(--color-secondary);
+  transform: scale(1.05);
+}
+
+.navbar .logo-image {
+  height: 50px;
+  width: auto;
+  border-radius: 12px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.navbar .logo:hover .logo-image {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(204, 0, 0, 0.2);
 }
 
 .navbar nav {
@@ -226,38 +260,38 @@ h3 {
 .hero {
   background: radial-gradient(
     circle at 20% 30%,
-    #cc0000 0%,
-    #ff6b6b 8%,
+    #003d7a 0%,
+    #0066cc 8%,
     transparent 15%
   ),
   radial-gradient(
     circle at 80% 20%,
-    #ff8c00 0%,
+    #ffc800 0%,
     #ffd700 8%,
     transparent 15%
   ),
   radial-gradient(
     circle at 30% 80%,
-    #00cc88 0%,
-    #0099ff 8%,
+    #0066cc 0%,
+    #003d7a 8%,
     transparent 15%
   ),
   radial-gradient(
     circle at 85% 75%,
-    #9933ff 0%,
-    #ff1493 8%,
+    #ffc800 0%,
+    #0066cc 8%,
     transparent 15%
   ),
   radial-gradient(
     circle at 50% 50%,
-    #ff6b6b 0%,
-    #ffd700 15%,
-    #0099ff 30%,
-    #cc0000 45%,
-    #ff8c00 60%,
-    #00cc88 75%,
-    #9933ff 90%,
-    #cc0000 100%
+    #0066cc 0%,
+    #ffc800 15%,
+    #003d7a 30%,
+    #0066cc 45%,
+    #ffc800 60%,
+    #003d7a 75%,
+    #ffc800 90%,
+    #003d7a 100%
   );
   background-size: 300% 300%;
   animation: bubbleSpiral 15s ease-in-out infinite;
@@ -373,23 +407,23 @@ h3 {
 .primary-cta:hover {
   background-color: var(--color-secondary);
   color: var(--color-white);
-  border-color: var(--color-secondary);
+  border-color: var(--color-accent);
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 25px rgba(255, 200, 0, 0.3);
 }
 
 .secondary-cta {
   background-color: transparent;
   color: var(--color-white);
-  border-color: var(--color-white);
+  border-color: var(--color-accent);
 }
 
 .secondary-cta:hover {
-  background-color: var(--color-white);
+  background-color: var(--color-accent);
   color: var(--color-primary);
-  border-color: var(--color-white);
+  border-color: var(--color-accent);
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 25px rgba(255, 200, 0, 0.4);
 }
 
 /* --- 4. What We Do (Features) & Diagram Styling --- */
