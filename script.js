@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // --- Carousel Functionality ---
+  // --- Vision/Mission Carousel Functionality ---
   const carouselTrack = document.getElementById("carouselTrack");
   const slides = document.querySelectorAll(".carousel-slide");
-  const dots = document.querySelectorAll(".dot");
+  const dots = document.querySelectorAll(".dot:not([data-testimonial])");
   const prevBtn = document.getElementById("carouselPrev");
   const nextBtn = document.getElementById("carouselNext");
   
@@ -37,6 +37,49 @@ document.addEventListener("DOMContentLoaded", () => {
     dot.addEventListener("click", (e) => {
       currentSlide = parseInt(e.target.dataset.slide);
       updateCarousel();
+    });
+  });
+
+  // --- Testimonials Carousel Functionality ---
+  const testimonialsTrack = document.getElementById("testimonialsTrack");
+  const testimonialSlides = document.querySelectorAll(".testimonial-slide");
+  const testimonialDots = document.querySelectorAll(".dot[data-testimonial]");
+  const testimonialsPrevBtn = document.getElementById("testimonialsPrev");
+  const testimonialsNextBtn = document.getElementById("testimonialsNext");
+  
+  let currentTestimonial = 0;
+  const totalTestimonials = testimonialSlides.length;
+
+  function updateTestimonialsCarousel() {
+    const offset = -currentTestimonial * 100;
+    if (testimonialsTrack) {
+      testimonialsTrack.style.transform = `translateX(${offset}%)`;
+    }
+    
+    // Update dots
+    testimonialDots.forEach((dot, index) => {
+      dot.classList.toggle("active", index === currentTestimonial);
+    });
+  }
+
+  function nextTestimonial() {
+    currentTestimonial = (currentTestimonial + 1) % totalTestimonials;
+    updateTestimonialsCarousel();
+  }
+
+  function prevTestimonial() {
+    currentTestimonial = (currentTestimonial - 1 + totalTestimonials) % totalTestimonials;
+    updateTestimonialsCarousel();
+  }
+
+  if (testimonialsPrevBtn) testimonialsPrevBtn.addEventListener("click", prevTestimonial);
+  if (testimonialsNextBtn) testimonialsNextBtn.addEventListener("click", nextTestimonial);
+
+  // Testimonial dot click navigation
+  testimonialDots.forEach((dot) => {
+    dot.addEventListener("click", (e) => {
+      currentTestimonial = parseInt(e.target.dataset.testimonial);
+      updateTestimonialsCarousel();
     });
   });
 
@@ -217,4 +260,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+  // 6. Auto-update Copyright Year
+  const yearElement = document.getElementById("year");
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
 });
