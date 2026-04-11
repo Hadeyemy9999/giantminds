@@ -980,7 +980,7 @@ h3 {
   margin: 50px 0;
 }
 
-.team-founders {
+.team-founder {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   max-width: 800px;
   margin-left: auto;
@@ -1078,7 +1078,7 @@ h3 {
 }
 
 @media (max-width: 768px) {
-  .team-founders {
+  .team-founder {
     grid-template-columns: 1fr;
   }
   

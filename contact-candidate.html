@@ -199,20 +199,58 @@
       }
 
       /* Success Message Modal */
-      #success-message {
+      .success-modal {
         display: none;
-        text-align: center;
-        padding: 40px;
-        border-radius: 10px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      }
+      .success-modal.show {
+        display: flex;
+      }
+      .success-modal-content {
         background-color: #e6ffe6;
         color: #1a7a1a;
         border: 1px solid #99ff99;
-        margin-top: 20px;
+        border-radius: 10px;
+        padding: 40px;
+        text-align: center;
+        max-width: 500px;
+        width: 90%;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
       }
-      #success-message i {
+      .success-modal-content i {
         font-size: 3em;
         color: #1a7a1a;
         margin-bottom: 15px;
+      }
+      .success-modal-content h4 {
+        margin-bottom: 15px;
+        color: #1a7a1a;
+      }
+      .success-modal-content p {
+        margin-bottom: 25px;
+        color: #1a7a1a;
+      }
+      .success-modal-btn {
+        background-color: #1a7a1a;
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      .success-modal-btn:hover {
+        background-color: #0f5f0f;
       }
 
       @media (max-width: 768px) {
@@ -223,6 +261,28 @@
         .contact-info {
           padding: 30px 20px;
         }
+      }
+
+      /* Disclaimer Styling */
+      .disclaimer {
+        text-align: center;
+        padding: 40px 20px;
+        background-color: #fff3cd;
+        border: 1px solid #ffeaa7;
+        border-radius: 10px;
+        margin: 40px auto;
+        max-width: 800px;
+        box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+      }
+      .disclaimer p {
+        font-size: 1.1em;
+        color: #856404;
+        margin-bottom: 10px;
+      }
+      .disclaimer .account-details {
+        font-weight: bold;
+        font-size: 1.2em;
+        color: #d39e00;
       }
     </style>
   </head>
@@ -301,7 +361,7 @@
           Candidate Application
         </h3>
 
-        <form id="candidate-form" action="https://formspree.io/f/mdkqzkwr" method="POST">
+        <form id="candidate-form" action="/api/submit-candidate" method="POST" enctype="multipart/form-data">
           <!-- Personal Information Section -->
           <fieldset class="form-fieldset">
             <legend class="form-legend">Personal Information</legend>
@@ -348,15 +408,12 @@
           <fieldset class="form-fieldset">
             <legend class="form-legend">Submit Your Resume</legend>
             <div class="form-group">
-              <p style="color: #666; margin-bottom: 15px;">
-                <strong>To submit your resume/CV:</strong> Please send it directly to 
-                <a href="mailto:giantminds3@gmail.com" style="color: var(--color-primary); font-weight: 600; text-decoration: none;">
-                  giantminds3@gmail.com
-                </a>
-              </p>
-              <p style="color: #999; font-size: 0.95em; margin: 0;">
-                <i class="fas fa-info-circle"></i> Include your name in the email subject line so we can match it to your application.
-              </p>
+              <label for="candidate_cv">Upload Your Resume <span class="required">*</span></label>
+              <div class="file-input-wrapper">
+                <input type="file" id="candidate_cv" name="resume" accept=".pdf,.doc,.docx" required />
+                <span class="file-input-label">Choose file (PDF, DOC, DOCX)</span>
+              </div>
+              <small class="form-hint">Maximum file size: 5MB.</small>
             </div>
           </fieldset>
 
@@ -365,16 +422,30 @@
           </button>
         </form>
 
-        <!-- Success Message -->
-        <div id="success-message">
-          <i class="fas fa-check-circle"></i>
-          <h4>Application Received!</h4>
-          <p>
-            Thank you for submitting your profile to GIANT MINDS. Our team will
-            review your information and be in touch within 2-3 business days.
-          </p>
+        <!-- Success Modal -->
+        <div id="success-modal" class="success-modal">
+          <div class="success-modal-content">
+            <i class="fas fa-check-circle"></i>
+            <h4>Application Received!</h4>
+            <p>
+              Thank you for submitting your profile to GIANT MINDS. Our team will
+              review your information and be in touch within 2-3 business days.
+            </p>
+            <button id="success-ok-btn" class="success-modal-btn">OK</button>
+          </div>
         </div>
       </div>
+    </div>
+
+    <!-- Disclaimer Section -->
+    <div class="disclaimer">
+      <p>Any Payment should be made to the Account Below:</p>
+      <p class="account-details">
+        Account Name: Giant Minds Enterprise<br>
+        Account Number: 1311435057<br>
+        Banker: Zenith Bank.
+      </p>
+      <p>Thank you for believing in us.</p>
     </div>
 
     <!-- 7. Footer (Identical to Index) -->

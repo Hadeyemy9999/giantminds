@@ -205,15 +205,38 @@ document.addEventListener("DOMContentLoaded", () => {
   const candidateForm = document.getElementById("candidate-form");
   if (candidateForm) {
     candidateForm.addEventListener("submit", function (e) {
-      // Validate file before submission
-      if (candidateCV && candidateCV.files.length > 0) {
-        if (!validateFileSize(candidateCV, 5)) {
-          e.preventDefault();
-          return false;
-        }
+      e.preventDefault();
+
+      const fileInput = document.getElementById('candidate_cv');
+      if (!fileInput || fileInput.files.length === 0) {
+        alert('Please upload your resume.');
+        return;
       }
-      // Allow form to submit to Formspree (no preventDefault)
-      // Form will redirect after successful submission
+
+      const file = fileInput.files[0];
+      const fileSizeMB = file.size / (1024 * 1024);
+      if (fileSizeMB > 5) {
+        alert('Resume file size exceeds 5MB limit.');
+        return;
+      }
+
+      const formData = new FormData(candidateForm);
+
+      fetch('/api/submit-candidate', {
+        method: 'POST',
+        body: formData,
+      })
+        .then(async (response) => {
+          if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(errorText || 'Submission failed');
+          }
+          document.getElementById('success-modal').classList.add('show');
+          candidateForm.reset();
+        })
+        .catch((error) => {
+          alert('Error sending submission: ' + error.message);
+        });
     });
   }
 
@@ -221,15 +244,35 @@ document.addEventListener("DOMContentLoaded", () => {
   const partnerForm = document.getElementById("partner-form");
   if (partnerForm) {
     partnerForm.addEventListener("submit", function (e) {
-      // Validate file before submission (if present)
-      if (partnerDoc && partnerDoc.files.length > 0) {
-        if (!validateFileSize(partnerDoc, 10)) {
-          e.preventDefault();
-          return false;
+      e.preventDefault();
+
+      const fileInput = document.getElementById('partner_doc');
+      if (fileInput && fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const fileSizeMB = file.size / (1024 * 1024);
+        if (fileSizeMB > 10) {
+          alert('Document file size exceeds 10MB limit.');
+          return;
         }
       }
-      // Allow form to submit to Formspree (no preventDefault)
-      // Form will redirect after successful submission
+
+      const formData = new FormData(partnerForm);
+
+      fetch('/api/submit-partner', {
+        method: 'POST',
+        body: formData,
+      })
+        .then(async (response) => {
+          if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(errorText || 'Submission failed');
+          }
+          document.getElementById('success-modal').classList.add('show');
+          partnerForm.reset();
+        })
+        .catch((error) => {
+          alert('Error sending submission: ' + error.message);
+        });
     });
   }
 
@@ -265,5 +308,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const yearElement = document.getElementById("year");
   if (yearElement) {
     yearElement.textContent = new Date().getFullYear();
+  }
+
+  // Success Modal OK Button Handler
+  const successOkBtn = document.getElementById('success-ok-btn');
+  if (successOkBtn) {
+    successOkBtn.addEventListener('click', function() {
+      document.getElementById('success-modal').classList.remove('show');
+      location.reload(); // Refresh the page to clear the form
+    });
   }
 });
