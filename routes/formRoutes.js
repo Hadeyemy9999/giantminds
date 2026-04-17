@@ -27,7 +27,10 @@ router.post('/submit-candidate', candidateUpload, async (req, res) => {
     return res.json({ success: true });
   } catch (error) {
     console.error('Candidate email error:', error);
-    return res.status(500).send('Failed to send candidate submission email.');
+    const message = process.env.NODE_ENV === 'production'
+      ? 'Failed to send candidate submission email.'
+      : `Failed to send candidate submission email: ${error.message}`;
+    return res.status(500).send(message);
   }
 });
 
@@ -44,7 +47,10 @@ router.post('/submit-partner', partnerUpload, async (req, res) => {
     return res.json({ success: true });
   } catch (error) {
     console.error('Partner email error:', error);
-    return res.status(500).send('Failed to send partner submission email.');
+    const message = process.env.NODE_ENV === 'production'
+      ? 'Failed to send partner submission email.'
+      : `Failed to send partner submission email: ${error.message}`;
+    return res.status(500).send(message);
   }
 });
 

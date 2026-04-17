@@ -1,6 +1,13 @@
 const nodemailer = require('nodemailer');
 
-const toEmail = (process.env.EMAIL_TO || 'giantminds3@gmail.com').split(',').map(e => e.trim());
+function sanitizeEmail(email) {
+  return String(email || '').trim().replace(/^['"]+|['"]+$/g, '');
+}
+
+const toEmail = (process.env.EMAIL_TO || 'giantminds3@gmail.com')
+  .split(',')
+  .map(e => sanitizeEmail(e))
+  .filter(Boolean);
 
 // Candidate email transporter
 const candidateTransporter = nodemailer.createTransport({
@@ -8,9 +15,17 @@ const candidateTransporter = nodemailer.createTransport({
   port: Number(process.env.SMTP_PORT) || 587,
   secure: process.env.SMTP_SECURE === 'true',
   auth: {
-    user: process.env.SMTP_USER_CANDIDATE,
+    user: sanitizeEmail(process.env.SMTP_USER_CANDIDATE),
     pass: process.env.SMTP_PASS_CANDIDATE,
   },
+});
+
+candidateTransporter.verify((error, success) => {
+  if (error) {
+    console.error('Candidate SMTP transporter verification failed:', error);
+  } else {
+    console.log('Candidate SMTP transporter verified.');
+  }
 });
 
 // Partner email transporter
@@ -19,9 +34,17 @@ const partnerTransporter = nodemailer.createTransport({
   port: Number(process.env.SMTP_PORT) || 587,
   secure: process.env.SMTP_SECURE === 'true',
   auth: {
-    user: process.env.SMTP_USER_PARTNER,
+    user: sanitizeEmail(process.env.SMTP_USER_PARTNER),
     pass: process.env.SMTP_PASS_PARTNER,
   },
+});
+
+partnerTransporter.verify((error, success) => {
+  if (error) {
+    console.error('Partner SMTP transporter verification failed:', error);
+  } else {
+    console.log('Partner SMTP transporter verified.');
+  }
 });
 
 if (!process.env.SMTP_HOST || !process.env.SMTP_PORT || !process.env.SMTP_USER_CANDIDATE || !process.env.SMTP_PASS_CANDIDATE) {
@@ -80,12 +103,13 @@ Giant Minds Enterprise<br>
 
 async function sendCandidateEmail(payload) {
   const { subject, text, html } = buildCandidateBody(payload);
+  const candidateAddress = sanitizeEmail(payload.email);
 
   // Send welcome email to candidate
   const candidateEmail = {
-    from: process.env.SMTP_USER_CANDIDATE,
-    to: payload.email, // Send to candidate's email
-    replyTo: process.env.SMTP_USER_CANDIDATE,
+    from: sanitizeEmail(process.env.SMTP_USER_CANDIDATE),
+    to: candidateAddress,
+    replyTo: candidateAddress,
     subject,
     text,
     html,
@@ -93,9 +117,9 @@ async function sendCandidateEmail(payload) {
 
   // Send data email to admissions
   const admissionsEmail = {
-    from: process.env.SMTP_USER_CANDIDATE,
+    from: sanitizeEmail(process.env.SMTP_USER_CANDIDATE),
     to: toEmail,
-    replyTo: payload.email,
+    replyTo: candidateAddress,
     subject: 'New Candidate Application - ' + payload.name,
     text: `New candidate application received:
 
@@ -125,6 +149,7 @@ Career goals: ${payload.career_goals}`,
 
 async function sendPartnerEmail(payload) {
   const { subject, text, html } = buildPartnerBody(payload);
+  const partnerAddress = sanitizeEmail(payload.email);
   const attachments = [];
 
   if (payload.file) {
@@ -136,9 +161,9 @@ async function sendPartnerEmail(payload) {
 
   // Send welcome email to partner
   const partnerEmail = {
-    from: process.env.SMTP_USER_PARTNER,
-    to: payload.email, // Send to partner's email
-    replyTo: process.env.SMTP_USER_PARTNER,
+    from: sanitizeEmail(process.env.SMTP_USER_PARTNER),
+    to: partnerAddress,
+    replyTo: sanitizeEmail(process.env.SMTP_USER_PARTNER),
     subject,
     text,
     html,
@@ -146,9 +171,9 @@ async function sendPartnerEmail(payload) {
 
   // Send data email to admissions
   const admissionsEmail = {
-    from: process.env.SMTP_USER_PARTNER,
+    from: sanitizeEmail(process.env.SMTP_USER_PARTNER),
     to: toEmail,
-    replyTo: payload.email,
+    replyTo: partnerAddress,
     subject: 'New Partner Inquiry - ' + payload.name,
     text: `New partner inquiry received:
 
